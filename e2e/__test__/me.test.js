@@ -73,4 +73,36 @@ describe('me API', () => {
         });
     });
   });
+
+  it('gets user favorite dogs', () => {
+    return Promise.all([
+      postFavorite(dog1),
+      postFavorite(dog2),
+      postFavorite(dog1)
+    ]).then(() => {
+      return request
+        .get('/api/me/favorites')
+        .set('Authorization', user.token)
+        .expect(200)
+        .then(({ body }) => {
+          expect(body.length).toBe(3);
+          expect(body[0]).toMatchInlineSnapshot(
+            {
+              _id: expect.any(String)
+            },
+            `
+            Object {
+              "_id": Any<String>,
+              "breed": "Corgi",
+              "purebred": true,
+              "size": Array [
+                "small",
+              ],
+              "weight": 26,
+            }
+          `
+          );
+        });
+    });
+  });
 });
