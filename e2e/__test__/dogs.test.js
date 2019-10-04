@@ -164,14 +164,21 @@ describe('dogs api', () => {
   });
 
   it('deletes a dog', () => {
-    return postDog(akk).then(dog => {
-      return request
-        .delete(`/api/dogs/${dog._id}`)
-        .set('Authorization', user.token)
-        .expect(200)
-        .then(({ body }) => {
-          expect(body.length).toBe(0);
-        });
-    });
+    return postDog(akk)
+      .then(dog => {
+        return request
+          .delete(`/api/dogs/${dog._id}`)
+          .set('Authorization', user.token)
+          .expect(200);
+      })
+      .then(() => {
+        return request
+          .get('/api/dogs')
+          .set('Authorization', user.token)
+          .expect(200)
+          .then(({ body }) => {
+            expect(body.length).toBe(0);
+          });
+      });
   });
 });
