@@ -19,14 +19,6 @@ describe('me API', () => {
     owner: {}
   };
 
-  const dog2 = {
-    breed: 'Corgi',
-    size: ['small'],
-    weight: 26,
-    purebred: true,
-    owner: {}
-  };
-
   function postDog(dog) {
     return request
       .post('/api/dogs')
@@ -77,7 +69,7 @@ describe('me API', () => {
   it('gets user favorite dogs', () => {
     return Promise.all([
       postFavorite(dog1),
-      postFavorite(dog2),
+      postFavorite(dog1),
       postFavorite(dog1)
     ]).then(() => {
       return request
@@ -86,19 +78,20 @@ describe('me API', () => {
         .expect(200)
         .then(({ body }) => {
           expect(body.length).toBe(3);
-          expect(body[0]).toMatchInlineSnapshot(
+          expect(body[1]).toMatchInlineSnapshot(
             {
               _id: expect.any(String)
             },
             `
             Object {
               "_id": Any<String>,
-              "breed": "Corgi",
+              "breed": "Alaskan Klee Kai",
               "purebred": true,
               "size": Array [
                 "small",
+                "medium",
               ],
-              "weight": 26,
+              "weight": 16,
             }
           `
           );
