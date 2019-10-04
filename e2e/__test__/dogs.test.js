@@ -16,7 +16,7 @@ describe('dogs api', () => {
     size: ['small', 'medium'],
     weight: 16,
     purebred: true,
-    owner: []
+    owner: {}
   };
 
   function postDog(dog) {
