@@ -66,7 +66,26 @@ describe('dogs api', () => {
         .set('Authorization', user.token)
         .expect(200)
         .then(({ body }) => {
-          expect(body).toEqual(dog);
+          expect(body).toMatchInlineSnapshot(
+            {
+              _id: expect.any(String),
+              owner: expect.any(String)
+            },
+            `
+            Object {
+              "__v": 0,
+              "_id": Any<String>,
+              "breed": "Alaskan Klee Kai",
+              "owner": Any<String>,
+              "purebred": true,
+              "size": Array [
+                "small",
+                "medium",
+              ],
+              "weight": 16,
+            }
+          `
+          );
         });
     });
   });
@@ -149,7 +168,10 @@ describe('dogs api', () => {
       return request
         .delete(`/api/dogs/${dog._id}`)
         .set('Authorization', user.token)
-        .expect(200);
+        .expect(200)
+        .then(({ body }) => {
+          expect(body.length).toBe(0);
+        });
     });
   });
 });
