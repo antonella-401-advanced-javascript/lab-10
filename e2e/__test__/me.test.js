@@ -105,4 +105,23 @@ describe('me API', () => {
         });
     });
   });
+
+  it('deletes specific user favorite', () => {
+    return postFavorite(dog1)
+      .then(fave => {
+        return request
+          .delete(`/api/me/favorites/${fave[0]._id}`)
+          .set('Authorization', user.token)
+          .expect(200);
+      })
+      .then(() => {
+        return request
+          .get('/api/me/favorites')
+          .set('Authorization', user.token)
+          .expect(200)
+          .then(({ body }) => {
+            expect(body.length).toBe(0);
+          });
+      });
+  });
 });
