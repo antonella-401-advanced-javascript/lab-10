@@ -6,6 +6,7 @@ describe('dogs api', () => {
   beforeEach(() => db.dropCollection('users'));
   beforeEach(() => db.dropCollection('dogs'));
 
+
   let user = null;
   beforeEach(() => {
     return signupUser().then(newUser => (user = newUser));
