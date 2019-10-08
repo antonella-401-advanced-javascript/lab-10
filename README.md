@@ -40,7 +40,10 @@ Models (Entities/Resources)
 ### Routes
 auth router
 1. `POST /api/auth/signup`
+1. `PUT /api/auth/users/:id/roles/:role`
+1. `DELETE /api/auth/users/:id/roles/:role`
 1. `POST /api/auth/signin`
+1. `GET /api/auth/users`
 1. `GET /api/auth/verify`
 
 me router
@@ -52,6 +55,14 @@ dog router
 1. `POST /api/dogs`
 1. `PUT and DELETE` `/api/dogs/:id`
 1. `GET /api/dogs`
+
+cat router
+1. `POST /api/dogs`
+1. `PUT and DELETE` `/api/dogs/:id`
+1. `GET /api/dogs`
+
+cat router
+
 
 ### Setup
 #### .env requirements
