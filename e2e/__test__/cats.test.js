@@ -61,8 +61,8 @@ describe('cats api', () => {
                   ...kitty
                 });
               });
-          })
-      })
+          });
+      });
   });
 
   it('gets cats', () => {
